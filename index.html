@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Page Title</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <script>
+     // Your JavaScript goes here!
+     let playerScore = 0;
+     let computerScore = 0;
+     function computerPlay() {
+       return Math.ceil(Math.random() * 3);
+     }
+     function playerInput() {
+       let playerString = prompt("Please enter Rock, Paper, or Scissors");
+       let pattRock = /rock/i;
+       let pattPaper = /paper/i;
+       let pattScissors = /scissors/i;
+       if (pattRock.test(playerString)) {
+         return 1;
+       } else if (pattPaper.test(playerString)) {
+         return 2;
+       } else if (pattScissors.test(playerString)) {
+         return 3;
+       } 
+
+     }
+     function compareSelections (playerSelection, computerSelection) {
+       let difference = playerSelection - computerSelection;
+       let selectionNames = ["", "Rock", "Paper", "Scissors"];
+       switch (difference) {
+         case 0:
+           return "Tie game!";
+           break;
+         case 1:
+         case -2:
+           playerScore++;
+           return "You Win! " + selectionNames[playerSelection] + " beats " + selectionNames[computerSelection];
+           break;
+         case 2:
+         case -1:
+           computerScore++;
+           return "You Lose! " + selectionNames[computerSelection] + " beats " + selectionNames[playerSelection];
+           break;
+       }
+     }
+     function playRound () {
+       let computerSelection = computerPlay();
+       let playerSelection = "";
+       while (!playerSelection) {
+         playerSelection = playerInput();
+       }
+       return compareSelections (playerSelection, computerSelection);
+
+
+     }
+     function game() {
+       for (i = 0; i < 5; i++) {
+         console.log(playRound());
+       }
+       let finalScore = "Final score: You - " + playerScore + ", Computer - " + computerScore;
+       console.log(finalScore);
+     }
+     game();
+
+
+  </script>
+</body>
+</html>
